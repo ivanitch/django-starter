@@ -1,0 +1,475 @@
+{% extends "base_clean.html" %}
+
+{% block title %}UI Components - {{ APP_NAME|default:"Django Starter" }}{% endblock %}
+
+{% block content %}
+    <div class="max-w-7xl mx-auto px-4 py-12 flex flex-col gap-12 w-full">
+        <!-- Header -->
+        <div class="flex flex-col gap-2">
+            <h1 class="text-3xl font-bold text-base-content">UI Components</h1>
+            <p class="text-base-content/70 text-sm">Minimalist design system with reduced border-radius (rounded-sm) and
+                borderless forms.</p>
+        </div>
+
+        <!-- Buttons & Modals -->
+        <section class="flex flex-col gap-4">
+            <h2 class="text-lg font-semibold border-b border-base-300 pb-2">Actions & Modals</h2>
+
+            <div class="flex flex-col gap-5">
+                <!-- Стандартные кнопки (аналог Bootstrap) -->
+                <div class="flex flex-wrap gap-3 items-center">
+                    <button class="btn btn-primary rounded-sm shadow-sm">Primary</button>
+                    <button class="btn btn-secondary rounded-sm shadow-sm">Secondary</button>
+                    <button class="btn btn-success rounded-sm shadow-sm text-white">Success</button>
+                    <button class="btn btn-error rounded-sm shadow-sm text-white">Danger</button>
+                    <button class="btn btn-warning rounded-sm shadow-sm">Warning</button>
+                    <button class="btn btn-info rounded-sm shadow-sm text-white">Info</button>
+                    <button class="btn btn-neutral rounded-sm shadow-sm">Dark</button>
+                    <button class="btn btn-ghost rounded-sm">Ghost</button>
+                </div>
+
+                <!-- Простые ссылки с иконками и эмодзи -->
+                <div class="flex flex-wrap gap-6 items-center">
+                    <a href="#"
+                       class="link link-primary flex items-center gap-1.5 text-sm font-medium hover:opacity-80">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        External Link
+                    </a>
+                    <a href="#" class="link link-hover flex items-center gap-1.5 text-sm text-base-content/80">
+                        🚀 Start Project
+                    </a>
+                    <a href="#" class="link link-hover flex items-center gap-1.5 text-sm text-error">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Delete Item
+                    </a>
+
+                    <!-- Кнопка вызова модалки -->
+                    <button class="btn btn-sm btn-outline rounded-sm ml-auto" onclick="demo_modal.showModal()">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                        </svg>
+                        Open Modal
+                    </button>
+                </div>
+                <!-- Кнопка вызова модалки с формой (занимает всю ширину на мобилках, справа на ПК) -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 flex justify-end mt-2 pt-6 border-t border-base-300">
+                    <button class="btn btn-primary rounded-sm shadow-sm" onclick="register_modal.showModal()">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                        </svg>
+                        Create Account
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Modal Component -->
+            <dialog id="demo_modal" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box rounded-sm bg-base-100 border border-base-300 shadow-xl">
+                    <h3 class="font-bold text-lg">Confirm Action</h3>
+                    <p class="py-4 text-sm text-base-content/70">Are you sure you want to proceed? This action cannot be
+                        undone and will permanently delete the selected data.</p>
+                    <div class="modal-action">
+                        <form method="dialog" class="flex gap-2">
+                            <button class="btn btn-ghost rounded-sm">Cancel</button>
+                            <button class="btn btn-error rounded-sm text-white">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
+            <!-- Сама модалка с формой регистрации -->
+            <dialog id="register_modal" class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box rounded-sm bg-base-100 border border-base-300 shadow-xl p-0 overflow-hidden">
+
+                    <!-- Шапка модалки -->
+                    <div class="bg-base-200/50 p-6 border-b border-base-300">
+                        <h3 class="font-bold text-xl text-base-content">Sign Up</h3>
+                        <p class="text-xs text-base-content/60 mt-1">Join the ultimate production-ready platform.</p>
+                    </div>
+
+                    <!-- Тело формы -->
+                    <form class="p-6 flex flex-col gap-4">
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <label class="form-control w-full">
+                                <div class="label pb-1"><span
+                                        class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">First Name</span>
+                                </div>
+                                <input type="text" placeholder="John"
+                                       class="input w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-sm transition-shadow"/>
+                            </label>
+                            <label class="form-control w-full">
+                                <div class="label pb-1"><span
+                                        class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Last Name</span>
+                                </div>
+                                <input type="text" placeholder="Doe"
+                                       class="input w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-sm transition-shadow"/>
+                            </label>
+                        </div>
+
+                        <label class="form-control w-full">
+                            <div class="label pb-1"><span
+                                    class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Email Address</span>
+                            </div>
+                            <input type="email" placeholder="john@example.com"
+                                   class="input w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-sm transition-shadow"/>
+                        </label>
+
+                        <label class="form-control w-full">
+                            <div class="label pb-1"><span
+                                    class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Password</span>
+                            </div>
+                            <input type="password" placeholder="••••••••"
+                                   class="input w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-sm transition-shadow"/>
+                        </label>
+
+                        <label class="form-control w-full">
+                            <div class="label pb-1"><span
+                                    class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Confirm Password</span>
+                            </div>
+                            <input type="password" placeholder="••••••••"
+                                   class="input w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-sm transition-shadow"/>
+                        </label>
+
+                        <div class="flex items-center gap-2 mt-2">
+                            <label>
+                                <input type="checkbox" class="checkbox checkbox-sm checkbox-primary rounded-[2px]"/>
+                            </label>
+                            <span class="label-text text-xs">I agree to the <a href="#" class="link link-primary">Terms of Service</a></span>
+                        </div>
+
+                        <!-- Кнопки управления (Submit и Cancel) -->
+                        <div class="mt-4 flex gap-3">
+                            <button type="button" class="btn btn-ghost rounded-sm flex-1"
+                                    onclick="register_modal.close()">Cancel
+                            </button>
+                            <!-- В реальном Django-проекте это будет type="submit" -->
+                            <button type="button" class="btn btn-primary rounded-sm flex-1">Register</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Закрытие модалки по клику на фон -->
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+        </section>
+
+        <!-- Tabs -->
+        <section class="flex flex-col gap-4">
+            <h2 class="text-lg font-semibold border-b border-base-300 pb-2">Navigation (Tabs)</h2>
+
+            <div role="tablist" class="tabs tabs-bordered w-full max-w-3xl">
+                <!-- Tab 1 -->
+                <input type="radio" name="components_tabs" role="tab" class="tab font-medium whitespace-nowrap"
+                       aria-label="General Info" checked="checked"/>
+                <div role="tabpanel" class="tab-content pt-6 pb-2 text-sm text-base-content/80">
+                    <h3 class="font-semibold text-base-content mb-2">General Information</h3>
+                    <p>This tab switching works using pure CSS and hidden radio buttons. No JavaScript is required for
+                        rendering this logic in DaisyUI.</p>
+                </div>
+
+                <!-- Tab 2 -->
+                <input type="radio" name="components_tabs" role="tab" class="tab font-medium whitespace-nowrap"
+                       aria-label="Security"/>
+                <div role="tabpanel" class="tab-content pt-6 pb-2 text-sm text-base-content/80">
+                    <h3 class="font-semibold text-base-content mb-2">Security Settings</h3>
+                    <p>Update your password, manage two-factor authentication, and review your recent login
+                        activity.</p>
+                </div>
+
+                <!-- Tab 3 -->
+                <input type="radio" name="components_tabs" role="tab" class="tab font-medium whitespace-nowrap"
+                       aria-label="Integrations"/>
+                <div role="tabpanel" class="tab-content pt-6 pb-2 text-sm text-base-content/80">
+                    <h3 class="font-semibold text-base-content mb-2">Third-party Integrations</h3>
+                    <p>Connect your account with external services like Slack, GitHub, or Jira to sync data
+                        automatically.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forms (Borderless) -->
+        <section class="flex flex-col gap-4">
+            <h2 class="text-lg font-semibold border-b border-base-300 pb-2">Form Elements (Borderless)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-base-100 p-6 rounded-sm border border-base-300 shadow-sm">
+                <label class="form-control w-full">
+                    <div class="label pb-1"><span
+                            class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Email Address</span>
+                    </div>
+                    <!-- Borderless Input: soft background, primary ring on focus -->
+                    <input type="email" placeholder="john@example.com"
+                           class="input w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-sm transition-shadow"/>
+                </label>
+
+                <label class="form-control w-full">
+                    <div class="label pb-1"><span
+                            class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Role</span>
+                    </div>
+                    <select class="select w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-sm transition-shadow">
+                        <option disabled selected>Select role</option>
+                        <option>Admin</option>
+                        <option>Manager</option>
+                        <option>User</option>
+                    </select>
+                </label>
+
+                <div class="flex items-center gap-6 pt-6">
+                    <label class="cursor-pointer flex items-center gap-2">
+                        <input type="checkbox" checked="checked"
+                               class="checkbox checkbox-sm checkbox-primary rounded-[2px]"/>
+                        <span class="label-text text-sm">Remember me</span>
+                    </label>
+                    <label class="cursor-pointer flex items-center gap-2">
+                        <input type="checkbox" class="toggle toggle-sm toggle-primary" checked/>
+                        <span class="label-text text-sm">Active</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Messages & Alerts -->
+        <section class="flex flex-col gap-4">
+            <h2 class="text-lg font-semibold border-b border-base-300 pb-2">Messages & Callouts</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+                <!-- Standard DaisyUI Alerts (rounded-sm) -->
+                <div class="flex flex-col gap-3">
+                    <div role="alert" class="alert alert-error rounded-sm shadow-sm py-3 text-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Failed to save changes. Please check your connection.</span>
+                    </div>
+                    <div role="alert" class="alert alert-success rounded-sm shadow-sm py-3 text-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>User profile updated successfully!</span>
+                    </div>
+                </div>
+
+                <!-- Custom Info Block / Callout (Clean style) -->
+                <div class="flex flex-col gap-3">
+                    <div class="bg-blue-500/10 border-l-4 border-blue-500 text-blue-800 dark:text-blue-300 p-4 rounded-r-sm">
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold text-sm">Pro Tip: Environment Separation</h3>
+                                <p class="text-xs mt-1 opacity-80">Use the isolated production `.env` file to ensure
+                                    local variables never leak into your live server setup.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-base-200 border border-base-300 p-4 rounded-sm flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-sm bg-base-300 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-base-content/70" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-sm">Two-Factor Authentication</h3>
+                                <p class="text-xs text-base-content/60">Not configured</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline rounded-sm text-xs">Setup</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Enhanced Table with Controls -->
+        <section class="flex flex-col gap-4 pb-10">
+            <h2 class="text-lg font-semibold border-b border-base-300 pb-2">Data Table & Controls</h2>
+
+            <!-- Table Toolbar -->
+            <div class="flex flex-col sm:flex-row justify-between gap-4 items-center bg-base-100">
+                <div class="relative w-full sm:w-72">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="w-4 h-4 text-base-content/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input type="text" placeholder="Search clients..."
+                           class="input input-sm w-full bg-base-200 border-none focus:outline-none focus:ring-2 focus:ring-primary/30 pl-9 rounded-sm"/>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <button class="btn btn-sm btn-ghost rounded-sm flex-1 sm:flex-none">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                        </svg>
+                        Filter
+                    </button>
+                    <button class="btn btn-sm btn-primary rounded-sm flex-1 sm:flex-none">Add New</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto bg-base-100 border border-base-300 rounded-sm shadow-sm">
+                <table class="table w-full text-sm">
+                    <thead class="bg-base-200/50">
+                    <tr class="text-base-content/70 uppercase text-[10px] tracking-wider border-base-300">
+                        <th class="w-12 text-center">
+                            <input type="checkbox" class="checkbox checkbox-xs rounded-[2px]"/>
+                        </th>
+                        <th>Client</th>
+                        <th>Service Plan</th>
+                        <th>Status</th>
+                        <th class="text-right">Price</th>
+                        <th class="w-16 text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-base-content">
+                    <tr class="border-base-300 hover:bg-base-200/50 transition-colors">
+                        <td class="text-center">
+                            <input type="checkbox" class="checkbox checkbox-xs rounded-[2px]"/>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar placeholder">
+                                    <div class="bg-primary/20 text-primary rounded-sm w-8 h-8">
+                                        <span class="text-xs font-semibold">JS</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-medium">John Smith</span>
+                                    <span class="text-[10px] opacity-50 font-mono">ID-10045</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="block text-sm">Pro Setup</span>
+                            <span class="text-[10px] text-base-content/50">Billed monthly</span>
+                        </td>
+                        <td>
+                            <!-- Dot status indicator -->
+                            <div class="inline-flex items-center gap-1.5 bg-success/10 text-success border border-success/20 px-2 py-0.5 rounded-sm text-[10px] font-medium">
+                                <div class="w-1.5 h-1.5 rounded-full bg-success"></div>
+                                Active
+                            </div>
+                        </td>
+                        <td class="text-right font-semibold">$1,200</td>
+                        <td class="text-center">
+                            <!-- Action Dropdown -->
+                            <div class="dropdown dropdown-end">
+                                <div tabindex="0" role="button" class="btn btn-ghost btn-xs px-1 rounded-sm">
+                                    <svg class="w-4 h-4 text-base-content/60" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                    </svg>
+                                </div>
+                                <ul tabindex="0"
+                                    class="dropdown-content z-[10] menu p-1.5 shadow-lg bg-base-100 border border-base-300 rounded-sm w-36 text-xs">
+                                    <li><a class="py-1.5 rounded-sm">View Profile</a></li>
+                                    <li><a class="py-1.5 rounded-sm">Edit Plan</a></li>
+                                    <div class="h-px bg-base-300 my-1 w-full"></div>
+                                    <li><a class="py-1.5 rounded-sm text-error hover:bg-error/10 hover:text-error">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-base-300 hover:bg-base-200/50 transition-colors">
+                        <td class="text-center">
+                            <input type="checkbox" class="checkbox checkbox-xs rounded-[2px]"/>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar placeholder">
+                                    <div class="bg-secondary/20 text-secondary rounded-sm w-8 h-8">
+                                        <span class="text-xs font-semibold">AM</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-medium">Alice Miller</span>
+                                    <span class="text-[10px] opacity-50 font-mono">ID-10046</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="block text-sm">Basic Maintenance</span>
+                            <span class="text-[10px] text-base-content/50">Billed yearly</span>
+                        </td>
+                        <td>
+                            <div class="inline-flex items-center gap-1.5 bg-error/10 text-error border border-error/20 px-2 py-0.5 rounded-sm text-[10px] font-medium">
+                                <div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+                                Canceled
+                            </div>
+                        </td>
+                        <td class="text-right font-semibold">$450</td>
+                        <td class="text-center">
+                            <div class="dropdown dropdown-end">
+                                <div tabindex="0" role="button" class="btn btn-ghost btn-xs px-1 rounded-sm">
+                                    <svg class="w-4 h-4 text-base-content/60" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                    </svg>
+                                </div>
+                                <ul tabindex="0"
+                                    class="dropdown-content z-[10] menu p-1.5 shadow-lg bg-base-100 border border-base-300 rounded-sm w-36 text-xs">
+                                    <li><a class="py-1.5 rounded-sm">View Profile</a></li>
+                                    <li><a class="py-1.5 rounded-sm">Restore Plan</a></li>
+                                    <div class="h-px bg-base-300 my-1 w-full"></div>
+                                    <li><a class="py-1.5 rounded-sm text-error hover:bg-error/10 hover:text-error">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- 5. FOOTER -->
+    <footer class="bg-base-200 text-base-content/70 py-6 border-t border-base-300 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+
+            <!-- Copyright -->
+            <div>
+                &copy; {% now "Y" %} {{ APP_NAME|default:"Django Starter" }} — Production-ready template.
+            </div>
+
+            <!-- Links -->
+            <div class="flex items-center gap-6 font-medium">
+                <a href="{% url 'demo:components-page' %}" class="hover:text-primary transition-colors">UI
+                    Components</a>
+                <a href="https://github.com/ivanitch/django-starter" target="_blank"
+                   class="flex items-center gap-1 hover:text-primary transition-colors">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+
+        </div>
+    </footer>
+{% endblock %}

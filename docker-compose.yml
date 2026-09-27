@@ -1,0 +1,61 @@
+x-dev-app: &dev-app
+  build:
+    context: .
+    target: dev
+  # Run as host user to avoid root-owned __pycache__ and node_modules
+  user: "${UID:-1000}:${GID:-1000}"
+  env_file: .env
+  environment:
+    DJANGO_SETTINGS_MODULE: config.settings.development
+    HOME: /tmp
+    npm_config_cache: /tmp/.npm-cache
+  volumes:
+    - .:/app
+    # Prevent overwriting container's venv with host's (if it exists)
+    - /app/.venv
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    <<: *dev-app
+    ports:
+      - "127.0.0.1:8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  tailwind:
+    <<: *dev-app
+    command: python manage.py tailwind start
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -1,0 +1,162 @@
+{% extends "base_clean.html" %} <!-- Assumes a clean base template without a sidebar -->
+
+{% block title %}Ultimate Django Starter Kit{% endblock %}
+
+{% block content %}
+    <!-- 1. HERO SECTION -->
+    <div class="hero min-h-screen bg-base-100 relative overflow-hidden">
+        <!-- Decorative background elements -->
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-[10%] right-[-5%] w-72 h-72 bg-secondary/20 rounded-full blur-3xl"></div>
+
+        <div class="hero-content text-center z-10 flex-col gap-8">
+            <div class="max-w-3xl flex flex-col items-center gap-6">
+                <div class="badge badge-primary badge-outline px-4 py-3 uppercase tracking-widest font-semibold text-xs">
+                    Production-Ready
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-base-content">
+                    Ultimate <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Django</span>
+                    Starter Kit
+                </h1>
+
+                <p class="py-2 text-lg md:text-xl text-base-content/70">
+                    A powerful Django 6.x starter template with pre-configured Docker Compose, Postgres, Redis, Celery,
+                    and TailwindCSS (DaisyUI). Build awesome SaaS projects without infrastructure headaches.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                    <a href="#quickstart" class="btn btn-primary btn-lg rounded-full px-8 shadow-lg shadow-primary/30">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Quick Start
+                    </a>
+                    <a href="https://github.com/ivanitch/django-starter" target="_blank"
+                       class="btn btn-outline btn-lg rounded-full px-8">
+                        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. TECH STACK (Marquee or Grid) -->
+    <div class="py-10 bg-base-200 border-y border-base-300">
+        <div class="max-w-5xl mx-auto px-4 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+            <span class="text-2xl font-bold tracking-tight text-base-content">Python 3.12+</span>
+            <span class="text-2xl font-bold tracking-tight text-base-content">Django 6.x</span>
+            <span class="text-2xl font-bold tracking-tight text-base-content">PostgreSQL</span>
+            <span class="text-2xl font-bold tracking-tight text-base-content">Docker</span>
+            <span class="text-2xl font-bold tracking-tight text-base-content">TailwindCSS</span>
+        </div>
+    </div>
+
+    <!-- 3. FEATURES SECTION -->
+    <div class="py-24 bg-base-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Why Choose This Starter Kit?</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow border border-base-300">
+                    <div class="card-body">
+                        <div class="w-12 h-12 bg-primary/20 text-primary rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="card-title text-xl">Fail-Fast Security</h3>
+                        <p class="text-base-content/70">The production server will refuse to start if the `.env` file is
+                            insecurely configured (e.g., missing secret key).</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow border border-base-300">
+                    <div class="card-body">
+                        <div class="w-12 h-12 bg-secondary/20 text-secondary rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="card-title text-xl">Flawless Docker</h3>
+                        <p class="text-base-content/70">No root/user permission conflicts on Linux or Mac. Uses the `uv`
+                            package manager for blazing-fast builds.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow border border-base-300">
+                    <div class="card-body">
+                        <div class="w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="card-title text-xl">Tailwind Hot-Reload</h3>
+                        <p class="text-base-content/70">Native integration directly inside the local container, without
+                            messy local dependencies (no node_modules on the host).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. QUICK START SECTION (Terminal) -->
+    <div id="quickstart" class="py-24 bg-base-200">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col items-center">
+            <h2 class="text-3xl font-bold mb-8">Quick Start</h2>
+            <p class="text-center text-base-content/70 mb-10 max-w-2xl">
+                Development should be enjoyable. We use a Makefile to reduce boilerplate and routine tasks.
+            </p>
+
+            <!-- DaisyUI mockup-code component -->
+            <div class="mockup-code w-full shadow-2xl bg-neutral text-neutral-content border border-neutral-focus">
+                <pre data-prefix="$"><code>git clone https://github.com/ivanitch/django-starter.git</code></pre>
+                <pre data-prefix="$"><code>cd django-starter</code></pre>
+                <pre data-prefix="$"><code>cp .env.example .env</code></pre>
+                <pre data-prefix="$" class="text-warning"><code>make up</code></pre>
+                <pre data-prefix=">"><code>Building containers... Done!</code></pre>
+                <pre data-prefix=">"><code>Starting Django server at http://localhost:8000 🚀</code></pre>
+            </div>
+
+            <div class="mt-8 text-sm text-base-content/50">
+                To configure the production environment, check the <a href="https://github.com/ivanitch/django-starter"
+                                                                      class="link link-primary">GitHub documentation</a>.
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. FOOTER -->
+    <footer class="bg-base-200 text-base-content/70 py-6 border-t border-base-300 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+        
+            <!-- Copyright -->
+            <div>
+                &copy; {% now "Y" %} {{ APP_NAME|default:"Django Starter" }} — Production-ready template.
+            </div>
+
+            <!-- Links -->
+            <div class="flex items-center gap-6 font-medium">
+                <a href="{% url 'demo:components-page' %}" class="hover:text-primary transition-colors">UI
+                    Components</a>
+                <a href="https://github.com/ivanitch/django-starter" target="_blank"
+                   class="flex items-center gap-1 hover:text-primary transition-colors">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+
+        </div>
+    </footer>
+{% endblock %}

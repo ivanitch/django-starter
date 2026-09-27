@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    {% load static tailwind_tags %}
+    {% tailwind_css %}
+</head>
+<body class="bg-jira-bg text-jira-text font-sans text-sm h-screen flex flex-col overflow-hidden antialiased transition-colors duration-200">
+    {% include 'common/header.html' %}
+    <div class="flex flex-1 overflow-hidden relative w-full">
+        <div class="drawer lg:drawer-open h-full w-full">
+            <input id="mobile-sidebar" type="checkbox" class="drawer-toggle"/>
+            <main class="drawer-content flex flex-col h-full overflow-hidden bg-jira-bg w-full max-w-full">
+                {% block content %}
+                {% endblock %}
+            </main>
+            <div class="drawer-side z-[100] h-full">
+                <label for="mobile-sidebar" aria-label="close sidebar" class="drawer-overlay border-none"></label>
+                {% include 'common/sidebar.html' %}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
