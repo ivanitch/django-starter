@@ -1,0 +1,44 @@
+{% extends "base_clean.html" %}
+
+{% block title %}Sign In - {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="flex-1 flex justify-center items-center p-4">
+    <div class="w-full max-w-md bg-base-100 rounded-sm border border-base-300 shadow-xl overflow-hidden">
+
+        <div class="bg-base-200/50 p-6 border-b border-base-300">
+            <h3 class="font-bold text-2xl text-base-content">Welcome back</h3>
+            <p class="text-sm text-base-content/60 mt-1">Sign in to your account.</p>
+        </div>
+
+        <form method="post" class="p-6 flex flex-col gap-4">
+            {% csrf_token %}
+
+            {% if form.errors %}
+            <div role="alert" class="alert alert-error rounded-sm shadow-sm py-3 text-sm mb-2">
+                <span>Invalid email or password. Please try again.</span>
+            </div>
+            {% endif %}
+
+            <label class="form-control w-full">
+                <div class="label pb-1"><span class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Email Address</span></div>
+                {{ form.username }}
+            </label>
+
+            <label class="form-control w-full">
+                <div class="label pb-1 flex justify-between w-full">
+                    <span class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Password</span>
+                    <a href="{% url 'users:password_reset' %}" class="link link-primary text-xs">Forgot password?</a>
+                </div>
+                {{ form.password }}
+            </label>
+
+            <button type="submit" class="btn btn-primary rounded-sm w-full mt-4">Sign In</button>
+
+            <p class="text-center text-sm text-base-content/70 mt-2">
+                Don't have an account? <a href="{% url 'users:register' %}" class="link link-primary font-medium">Sign up</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-.PHONY: help ps up down restart logs shell bash migrate collectstatic tailwind destroy prod-deploy prod-logs prod-shell db-backup
+.PHONY: help ps up down restart logs shell bash migrate startapp collectstatic tailwind destroy prod-deploy prod-logs prod-shell db-backup
 
 # Environment Variables
 DC = UID=$$(id -u) GID=$$(id -g) docker compose
@@ -12,19 +12,20 @@ help:
 	@echo "           Django Starter Kit - Makefile                  "
 	@echo "=========================================================="
 	@echo "LOCAL COMMANDS:"
-	@echo "  make up             - Build & start local dev environment"
-	@echo "  make down           - Stop local environment"
-	@echo "  make logs           - View logs"
-	@echo "  make shell          - Access Django shell"
-	@echo "  make bash           - Access container bash"
-	@echo "  make migrate        - Apply migrations"
-	@echo "  make destroy        - DESTROY local containers & volumes"
+	@echo "  make up               - Build & start local dev environment"
+	@echo "  make down             - Stop local environment"
+	@echo "  make logs             - View logs"
+	@echo "  make shell            - Access Django shell"
+	@echo "  make bash             - Access container bash"
+	@echo "  make migrate          - Apply migrations"
+	@echo "  make startapp name=X  - Create a new application in the apps/ folder (example: make startapp name=users)"
+	@echo "  make destroy          - Destroy local containers & volumes"
 	@echo "----------------------------------------------------------"
 	@echo "PRODUCTION COMMANDS:"
-	@echo "  make prod-deploy    - Zero-downtime deploy on server"
-	@echo "  make prod-logs      - View production logs"
-	@echo "  make prod-shell     - Access production Django shell"
-	@echo "  make db-backup      - Create a database backup (prod)"
+	@echo "  make prod-deploy      - Zero-downtime deploy on server"
+	@echo "  make prod-logs        - View production logs"
+	@echo "  make prod-shell       - Access production Django shell"
+	@echo "  make db-backup        - Create a database backup (prod)"
 	@echo "=========================================================="
 
 # ==========================================
@@ -54,6 +55,13 @@ bash:
 
 migrate:
 	$(EXEC) python manage.py migrate
+
+startapp:
+	@if [ -z "$(name)" ]; then \
+		echo "Used: make startapp name=<app_name>"; \
+		exit 1; \
+	fi
+	$(EXEC) python manage.py startapp $(name) apps/$(name)
 
 makemigrations:
 	$(EXEC) python manage.py makemigrations

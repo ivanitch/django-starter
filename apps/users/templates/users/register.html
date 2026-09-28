@@ -1,0 +1,82 @@
+{% extends "base_clean.html" %}
+
+{% block title %}Sign Up - {{ APP_NAME }}{% endblock %}
+
+{% block content %}
+<div class="flex-1 flex justify-center items-center p-4">
+    <div class="w-full max-w-md bg-base-100 rounded-sm border border-base-300 shadow-xl overflow-hidden">
+
+        <!-- Header -->
+        <div class="bg-base-200/50 p-6 border-b border-base-300">
+            <h3 class="font-bold text-2xl text-base-content">Create an account</h3>
+            <p class="text-sm text-base-content/60 mt-1">Join the ultimate production-ready platform.</p>
+        </div>
+
+        <!-- Registration Form -->
+        <form method="post" class="p-6 flex flex-col gap-4">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div role="alert" class="alert alert-error rounded-sm shadow-sm py-3 text-sm mb-2">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Please correct the errors below.</span>
+                </div>
+            {% endif %}
+
+            <!-- Email Field -->
+            <label class="form-control w-full">
+                <div class="label pb-1"><span class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Email Address</span></div>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <span class="text-xs text-error mt-1">{{ form.email.errors|striptags }}</span>
+                {% endif %}
+            </label>
+
+            <!-- Phone and Country Fields -->
+            <div class="flex flex-col sm:flex-row gap-4">
+                <label class="form-control w-full">
+                    <div class="label pb-1"><span class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Phone (Optional)</span></div>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}
+                        <span class="text-xs text-error mt-1">{{ form.phone.errors|striptags }}</span>
+                    {% endif %}
+                </label>
+                <label class="form-control w-full">
+                    <div class="label pb-1"><span class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Country (Optional)</span></div>
+                    {{ form.country }}
+                    {% if form.country.errors %}
+                        <span class="text-xs text-error mt-1">{{ form.country.errors|striptags }}</span>
+                    {% endif %}
+                </label>
+            </div>
+
+            <!-- Password Fields (Corrected to password1 and password2) -->
+            <label class="form-control w-full mt-2">
+                <div class="label pb-1"><span class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Password</span></div>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <span class="text-xs text-error mt-1">{{ form.password1.errors|striptags }}</span>
+                {% endif %}
+            </label>
+
+            <label class="form-control w-full">
+                <div class="label pb-1"><span class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Confirm Password</span></div>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <span class="text-xs text-error mt-1">{{ form.password2.errors|striptags }}</span>
+                {% endif %}
+            </label>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary rounded-sm w-full mt-4 shadow-sm">Sign Up</button>
+
+            <!-- Login Link -->
+            <p class="text-center text-sm text-base-content/70 mt-2">
+                Already have an account? <a href="{% url 'users:login' %}" class="link link-primary font-medium">Sign in</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

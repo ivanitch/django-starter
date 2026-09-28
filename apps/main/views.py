@@ -1,10 +1,10 @@
 from django.shortcuts import render
+from django.conf import settings
 
 
 def home_page(request):
     context = {
-        'title': 'ProfiFlow 🦋 сервис онлайн-записи для бьюти-мастеров и студий',
-        'h1': 'Hello, world! 👋',
+        'title': settings.APP_NAME,
     }
 
     return render(request, 'main/home.html', context)
