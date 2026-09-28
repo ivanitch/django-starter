@@ -27,12 +27,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # UI
     "theme",
     "tailwind",
-    # Local Apps
     "apps.main.apps.MainConfig",
     "apps.demo.apps.DemoConfig",
+    "apps.users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -113,3 +112,8 @@ DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL", default="webmaster@localhost"
 # Custom Project Settings
 APP_VERSION = env.str("APP_VERSION", default="0.1.0")
 APP_NAME = env.str("APP_NAME", default="Django Starter")
+
+# Users
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = 'users:login'
+# LOGIN_REDIRECT_URL = '/users/profile/'

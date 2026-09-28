@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{{ APP_NAME|default:"Django Starter" }}{% endblock %}</title>
-
-    <!-- Theme initialization script (prevents flickering on load) -->
     <script>
         const savedTheme = localStorage.getItem('theme');
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -20,57 +18,23 @@
             document.documentElement.setAttribute('data-theme', 'light');
         }
     </script>
-
-    <!-- TailwindCSS integration -->
     {% load static tailwind_tags %}
     {% tailwind_css %}
 </head>
 <body class="bg-base-100 text-base-content min-h-screen flex flex-col font-sans antialiased transition-colors duration-200">
-
-<!-- Minimalist Navbar for clean pages -->
-<header class="sticky top-0 z-50 bg-base-100/80 backdrop-blur-md border-b border-base-300">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <!-- Logo -->
-        <a href="{% url 'main:home' %}"
-           class="flex items-center gap-2 font-bold text-xl tracking-wide hover:opacity-80 transition-opacity">
-            <div class="bg-primary/10 text-primary p-1.5 rounded-lg">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                </svg>
-            </div>
-            <span class="text-base-content">Django</span><span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Starter</span>
-        </a>
-
-        <div class="flex items-center gap-4">
-            <!-- Theme toggle button -->
-            <button id="theme-toggle-clean"
-                    class="btn btn-ghost btn-circle btn-sm text-base-content/70 hover:text-base-content">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                </svg>
-            </button>
-            <a href="https://github.com/ivanitch/django-starter" target="_blank"
-               class="hidden sm:inline-flex btn btn-outline btn-sm rounded-full font-medium">
-                GitHub
-            </a>
-        </div>
-    </div>
-</header>
+<!-- Header -->
+{% include "common/header.html" %}
 
 <!-- Main content -->
 <main class="flex-1 w-full flex flex-col">
     {% block content %}
     {% endblock %}
 </main>
+<!-- Footer -->
+{% include "common/footer.html" %}
 
-<!-- Scripts -->
-<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static "js/main.js" %}"></script>
 <script>
-    // Simple theme toggle logic
     const cleanThemeToggle = document.getElementById('theme-toggle-clean');
     if (cleanThemeToggle) {
         cleanThemeToggle.addEventListener('click', () => {
