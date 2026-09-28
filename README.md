@@ -110,10 +110,13 @@ docker compose -f docker-compose.prod.yml --env-file .env.prod run --rm -p 80:80
 
 Then uncomment the HTTPS blocks in `docker/nginx/prod.conf` and re-run `make prod-deploy`.
 
+[Detailed deployment instructions for production](docs/ru/prod.md)
+
 ---
 
 ## Additional
 
-- [Make commands cheat sheet](docs/make.md)
-- [Cheat sheet: Tailwind + Django (uv)](docs/tailwind.md)
+- [Make commands cheat sheet](docs/ru/make.md)
+- [Cheat sheet: Tailwind + Django (uv)](docs/ru/tailwind.md)
+- [Production Deployment](docs/ru/prod.md)
 

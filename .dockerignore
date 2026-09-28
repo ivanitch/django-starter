@@ -16,3 +16,4 @@ backups
 .vscode
 docker-compose*.yml
 Makefile
+docker/certbot/
