@@ -116,4 +116,4 @@ APP_NAME = env.str("APP_NAME", default="Django Starter")
 # Users
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = 'users:login'
-# LOGIN_REDIRECT_URL = '/users/profile/'
+LOGIN_REDIRECT_URL = '/users/profile/'
