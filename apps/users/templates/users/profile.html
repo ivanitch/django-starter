@@ -52,17 +52,6 @@
             <p class="text-sm text-base-content/70 mt-1">Manage your personal information and preferences.</p>
         </div>
 
-        <!-- System Messages / Alerts -->
-        {% if messages %}
-            <div class="flex flex-col gap-2">
-                {% for message in messages %}
-                    <div role="alert" class="alert {% if message.tags == 'error' %}alert-error{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %} rounded-sm shadow-sm py-3 text-sm">
-                        <span>{{ message }}</span>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-
         <!-- Stats Demo Component -->
         <div class="stats stats-vertical sm:stats-horizontal bg-base-100 border border-base-300 shadow-sm rounded-sm w-full">
             <div class="stat">

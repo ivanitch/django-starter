@@ -16,9 +16,10 @@
                        class="text-primary hover:text-primary-focus transition-colors font-semibold" target="_blank">Admin
                         Panel</a>
                 {% endif %}
-                <a href="{% url 'users:profile' %}" class="hover:text-primary transition-colors">Profile</a>
+                <a href="{% url 'users:profile' %}" class="hover:text-primary transition-colors">Profile ({{ user.email }})</a>
                 <form method="post" action="{% url 'users:logout' %}" class="inline m-0 p-0">
                     {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
                     <button type="submit"
                             class="hover:text-primary transition-colors bg-transparent border-none cursor-pointer font-medium p-0">
                         Log Out

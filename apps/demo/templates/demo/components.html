@@ -243,57 +243,118 @@
         <!-- Messages & Alerts -->
         <section class="flex flex-col gap-4">
             <h2 class="text-lg font-semibold border-b border-base-300 pb-2">Messages & Callouts</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-                <!-- Standard DaisyUI Alerts (rounded-sm) -->
-                <div class="flex flex-col gap-3">
-                    <div role="alert" class="alert alert-error rounded-sm shadow-sm py-3 text-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <span>Failed to save changes. Please check your connection.</span>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- 1. Global System Toasts (from messages.html) -->
+                <div class="flex flex-col gap-3 relative">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-base-content/50 mb-2">Global System
+                        Toasts</h3>
+
+                    <!-- Error Toast Demo -->
+                    <div class="alert alert-error rounded-sm shadow-md flex items-start text-sm w-full" role="alert">
+                        <div class="shrink-0 mt-0.5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-xs uppercase tracking-wider opacity-70 mb-0.5">Server error</h3>
+                            <div class="opacity-90">Failed to connect to the database.</div>
+                        </div>
+                        <button type="button"
+                                class="btn btn-ghost btn-xs btn-circle shrink-0 opacity-70 hover:opacity-100 -mr-2 -mt-1"
+                                onclick="this.closest('.alert').remove()">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div role="alert" class="alert alert-success rounded-sm shadow-sm py-3 text-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <span>User profile updated successfully!</span>
+
+                    <!-- Success Toast Demo -->
+                    <div class="alert alert-success rounded-sm shadow-md flex items-start text-sm w-full" role="alert">
+                        <div class="shrink-0 mt-0.5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-xs tracking-wider opacity-70 mb-0.5">Successfully saved</h3>
+                            <div class="opacity-90">The user profile was successfully updated.</div>
+                        </div>
+                        <button type="button"
+                                class="btn btn-ghost btn-xs btn-circle shrink-0 opacity-70 hover:opacity-100 -mr-2 -mt-1"
+                                onclick="this.closest('.alert').remove()">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Custom Info Block / Callout (Clean style) -->
+                <!-- 2. Inline Form Errors -->
                 <div class="flex flex-col gap-3">
-                    <div class="bg-blue-500/10 border-l-4 border-blue-500 text-blue-800 dark:text-blue-300 p-4 rounded-r-sm">
-                        <div class="flex gap-3">
-                            <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <div>
-                                <h3 class="font-semibold text-sm">Pro Tip: Environment Separation</h3>
-                                <p class="text-xs mt-1 opacity-80">Use the isolated production `.env` file to ensure
-                                    local variables never leak into your live server setup.</p>
-                            </div>
-                        </div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-base-content/50 mb-2">Inline Form
+                        Errors</h3>
+
+                    <div role="alert" class="alert alert-error rounded-sm shadow-sm py-3 text-sm">
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Please correct the errors in the form below.</span>
                     </div>
 
-                    <div class="bg-base-200 border border-base-300 p-4 rounded-sm flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-sm bg-base-300 flex items-center justify-center">
-                                <svg class="w-4 h-4 text-base-content/70" fill="none" stroke="currentColor"
+                    <!-- Input with validation error -->
+                    <label class="form-control w-full mt-2">
+                        <div class="label pb-1"><span
+                                class="label-text text-xs font-semibold uppercase tracking-wider text-base-content/70">Password</span>
+                        </div>
+                        <input type="password" placeholder="••••••••"
+                               class="input w-full bg-error/10 border border-error/50 focus:outline-none focus:ring-2 focus:ring-error/30 rounded-sm transition-shadow text-error"
+                               value="123"/>
+                        <span class="text-xs text-error mt-1">This password is too short. It must contain at least 8 characters.</span>
+                    </label>
+                </div>
+
+                <!-- 3. Custom Callouts (Clean style) -->
+                <div class="flex flex-col gap-3 lg:col-span-2">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-base-content/50 mb-2 mt-2">Informational
+                        Callouts</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-blue-500/10 border-l-4 border-blue-500 text-blue-800 dark:text-blue-300 p-4 rounded-r-sm">
+                            <div class="flex gap-3">
+                                <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor"
                                      viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path>
+                                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-sm">Two-Factor Authentication</h3>
-                                <p class="text-xs text-base-content/60">Not configured</p>
+                                <div>
+                                    <h3 class="font-semibold text-sm">Pro Tip: Environment Separation</h3>
+                                    <p class="text-xs mt-1 opacity-80">Use the isolated production `.env` file to ensure
+                                        local variables never leak into your live server setup.</p>
+                                </div>
                             </div>
                         </div>
-                        <button class="btn btn-sm btn-outline rounded-sm text-xs">Setup</button>
+
+                        <div class="bg-base-200 border border-base-300 p-4 rounded-sm flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-sm bg-base-300 flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4 text-base-content/70" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-sm">Two-Factor Authentication</h3>
+                                    <p class="text-xs text-base-content/60">Not configured for this account.</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline rounded-sm text-xs ml-2">Setup</button>
+                        </div>
                     </div>
                 </div>
 
@@ -350,14 +411,14 @@
                         </td>
                         <td>
                             <div class="flex items-center gap-3">
-                                <div class="avatar placeholder">
-                                    <div class="bg-primary/20 text-primary rounded-sm w-8 h-8">
-                                        <span class="text-xs font-semibold">JS</span>
+                                <div class="avatar placeholder shrink-0">
+                                    <div class="bg-primary/20 text-primary rounded-sm w-10 h-10 flex items-center justify-center">
+                                        <span class="text-sm font-semibold">JS</span>
                                     </div>
                                 </div>
-                                <div class="flex flex-col">
-                                    <span class="font-medium">John Smith</span>
-                                    <span class="text-[10px] opacity-50 font-mono">ID-10045</span>
+                                <div class="flex flex-col justify-center">
+                                    <span class="font-medium text-sm leading-tight">John Smith</span>
+                                    <span class="text-[11px] opacity-60 font-mono mt-0.5">ID-10045</span>
                                 </div>
                             </div>
                         </td>
@@ -400,14 +461,14 @@
                         </td>
                         <td>
                             <div class="flex items-center gap-3">
-                                <div class="avatar placeholder">
-                                    <div class="bg-secondary/20 text-secondary rounded-sm w-8 h-8">
-                                        <span class="text-xs font-semibold">AM</span>
+                                <div class="avatar placeholder shrink-0">
+                                    <div class="bg-primary/20 text-primary rounded-sm w-10 h-10 flex items-center justify-center">
+                                        <span class="text-sm font-semibold">AM</span>
                                     </div>
                                 </div>
-                                <div class="flex flex-col">
-                                    <span class="font-medium">Alice Miller</span>
-                                    <span class="text-[10px] opacity-50 font-mono">ID-10046</span>
+                                <div class="flex flex-col justify-center">
+                                    <span class="font-medium text-sm leading-tight">Alice Miller</span>
+                                    <span class="text-[11px] opacity-60 font-mono mt-0.5">ID-10046</span>
                                 </div>
                             </div>
                         </td>
