@@ -82,10 +82,20 @@ cp .env.prod.example .env.prod
 nano .env.prod
 ````
 
-Make sure to generate a secure `SECRET_KEY`, set `DEBUG=False`, update `ALLOWED_HOSTS`, and set the exact URL
-in `CSRF_TRUSTED_ORIGINS`.
+Make sure to generate a secure `SECRET_KEY`, set `DEBUG=False`, update `ALLOWED_HOSTS`, and set the exact `URL` in
+`CSRF_TRUSTED_ORIGINS`. Add your domains (`DOMAIN`, `WWW_DOMAIN`), `CERTBOT_EMAIL`, configure PostgreSQL credentials (
+`POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`), and set up your `SMTP email variables`.
 
-3. **Deploy (Zero Downtime):**
+3. **🔒 SSL via Certbot (First Time Setup):**
+
+```bash
+make prod-deploy
+```
+
+This command will build the prod image, apply migrations, run collectstatic into the Docker volume, and safely restart
+the web and nginx containers
+
+4. **Deploy (Zero Downtime)**
 
 ```bash
 make prod-deploy
@@ -94,23 +104,13 @@ make prod-deploy
 This command will build the `prod image`, apply `migrations`, run `collectstatic` into the Docker volume, and safely
 restart the `web` and `nginx` containers.
 
-4. **View Production Logs:**
+5. **View Production Logs:**
 
 ```bash
 make prod-logs
 ```
 
-## 🔒 SSL via Certbot (First Time Setup)
-
-```bash
-docker compose -f docker-compose.prod.yml --env-file .env.prod run --rm -p 80:80 \
-  --entrypoint certbot certbot certonly --standalone \
-  -d yourdomain.com -d [www.yourdomain.com](https://www.yourdomain.com) --agree-tos --no-eff-email
-```
-
-Then uncomment the HTTPS blocks in `docker/nginx/prod.conf` and re-run `make prod-deploy`.
-
-[Detailed deployment instructions for production](docs/ru/prod.md)
+[Detailed deployment instructions for production](docs/production.md)
 
 ---
 
@@ -118,5 +118,5 @@ Then uncomment the HTTPS blocks in `docker/nginx/prod.conf` and re-run `make pro
 
 - [Make commands cheat sheet](docs/ru/make.md)
 - [Cheat sheet: Tailwind + Django (uv)](docs/ru/tailwind.md)
-- [Production Deployment](docs/ru/prod.md)
+- [Production Deployment](docs/production.md)
 

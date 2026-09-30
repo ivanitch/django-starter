@@ -103,3 +103,10 @@ db-backup:
 	@mkdir -p backups
 	$(DC_PROD) exec -T db sh -c 'pg_dump -U "$$POSTGRES_USER" -d "$$POSTGRES_DB" -F c' > backups/prod_backup_$$(date +%Y%m%d_%H%M%S).dump
 	@echo "Backup saved in backups/ folder."
+
+prod-init-ssl:
+	@echo "Initializing SSL certificates for domain $$DOMAIN"
+	$(DC_PROD) run --rm -p 80:80 --entrypoint 'sh -c "certbot certonly --standalone -d $$DOMAIN -d $$WWW_DOMAIN --agree-tos --no-eff-email -m $$CERTBOT_EMAIL"' certbot
+	@echo "Restoring access permissions without sudo..."
+	docker run --rm -v $$(pwd)/docker/certbot:/certbot alpine chown -R $$(id -u):$$(id -g) /certbot
+	@echo "Done! Now you can run make prod-deploy"
