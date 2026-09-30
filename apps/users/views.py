@@ -57,14 +57,20 @@ class ActivateAccountView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
 
-        if user is not None and default_token_generator.check_token(user, token):
-            user.is_active = True
-            user.save()
-            messages.success(request, 'Your account has been activated successfully. You can now log in.')
-            return redirect('users:login')
-        else:
-            messages.error(request, 'Activation link is invalid or has expired.')
-            return redirect('users:register')
+        if user is not None:
+            if user.is_active:
+                messages.info(request, 'Your account is already activated. You can log in.')
+                return redirect('users:login')
+
+            if default_token_generator.check_token(user, token):
+                user.is_active = True
+                user.save()
+                messages.success(request, 'Your account has been activated successfully. You can now log in.')
+                return redirect('users:login')
+
+        # 3. Если пользователь не найден или токен реально просрочен
+        messages.error(request, 'Activation link is invalid or has expired.')
+        return redirect('users:register')
 
 
 class UserLoginView(LoginView):
