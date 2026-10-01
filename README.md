@@ -1,21 +1,26 @@
 # Ultimate Django Starter Kit
 
+<p align="left">
+  <img src="https://img.shields.io/badge/python-3.14-blue?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/django-6.x-092E20?logo=django&logoColor=white" alt="Django">
+  <img src="https://img.shields.io/badge/postgres-18-316192?logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/redis-8-DC382D?logo=redis&logoColor=white" alt="Redis">
+  <img src="https://img.shields.io/badge/docker--compose-2496ED?logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/tailwindcss-38B2AC?logo=tailwind-css&logoColor=white" alt="TailwindCSS">
+  <img src="https://img.shields.io/badge/uv-manager-8A2BE2?logo=python&logoColor=white" alt="uv">
+</p>
+
 Production-ready Django 6.x starter template featuring Docker Compose, Postgres, Redis, Celery, and TailwindCSS
 integrated with DaisyUI.
 
 ## Tech Stack
 
-- Python 3.12+
-- Django 6.x
-- PostgreSQL
-- Redis
-- Docker Compose
-- Gunicorn + Nginx
-- uv
-- pytest, ruff, mypy
-- GitHub Actions
-- django-environ
-- settings: local / prod
+- **Core:** Python 3.14, Django 6.x
+- **Database & Cache:** PostgreSQL 18, Redis 8
+- **Infrastructure:** Docker Compose, Gunicorn + Nginx
+- **Frontend:** TailwindCSS, DaisyUI
+- **Tooling:** `uv` (package management), pytest, ruff, mypy
+- **CI/CD:** GitHub Actions, strict local/prod environment split (`django-environ`)
 
 ## Features
 
@@ -38,7 +43,7 @@ cd django-project
 
 2. **Setup environment variables:**
 
-```bsah
+```shell
 cp .env.example .env
 ```
 
@@ -58,6 +63,14 @@ make bash
 # Inside container:
 python manage.py createsuperuser
 ````
+
+5. **View local Logs:**
+
+```bash
+make logs
+
+make logs db
+```
 
 App runs at: http://localhost:8000
 
@@ -89,7 +102,7 @@ Make sure to generate a secure `SECRET_KEY`, set `DEBUG=False`, update `ALLOWED_
 3. **🔒 SSL via Certbot (First Time Setup):**
 
 ```bash
-make prod-deploy
+make prod-init-ssl
 ```
 
 This command will build the prod image, apply migrations, run collectstatic into the Docker volume, and safely restart
