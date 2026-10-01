@@ -2,6 +2,9 @@ x-dev-app: &dev-app
   build:
     context: .
     target: dev
+    args:
+      PYTHON_VERSION: ${PYTHON_VERSION:-3.14-slim}
+      NODE_VERSION: ${NODE_VERSION:-26-slim}
   # Run as host user to avoid root-owned __pycache__ and node_modules
   user: "${UID:-1000}:${GID:-1000}"
   env_file: .env
@@ -11,18 +14,16 @@ x-dev-app: &dev-app
     npm_config_cache: /tmp/.npm-cache
   volumes:
     - .:/app
-    # Prevent overwriting container's venv with host's (if it exists)
-    - /app/.venv
 
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:${POSTGRES_VERSION:-18-alpine}
     restart: unless-stopped
     env_file: .env
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
       interval: 5s
@@ -30,7 +31,7 @@ services:
       retries: 5
 
   redis:
-    image: redis:7-alpine
+    image: redis:${REDIS_VERSION:-8-alpine}
     restart: unless-stopped
     volumes:
       - redis_data:/data
