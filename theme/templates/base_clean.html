@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}{{ APP_NAME|default:"Django Starter" }}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
+    {% load static tailwind_tags %}
+    {% tailwind_css %}
+
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.png' %}">
     <script>
         const savedTheme = localStorage.getItem('theme');
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -18,8 +22,6 @@
             document.documentElement.setAttribute('data-theme', 'light');
         }
     </script>
-    {% load static tailwind_tags %}
-    {% tailwind_css %}
 </head>
 <body class="bg-base-100 text-base-content min-h-screen flex flex-col font-sans antialiased transition-colors duration-200">
 <!-- Header -->

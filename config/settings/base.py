@@ -56,6 +56,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.global_settings"
             ],
         },
     },
@@ -107,16 +108,26 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL", default="webmaster@localhost")
+# Project Settings
+try:
+    VERSION_FILE = BASE_DIR / '.version'
+    APP_VERSION = VERSION_FILE.read_text(encoding='utf-8').strip()
+except FileNotFoundError:
+    APP_VERSION = "0.0.0-dev"
 
-# Custom Project Settings
-APP_VERSION = env.str("APP_VERSION", default="0.1.0")
 APP_NAME = env.str("APP_NAME", default="Django Starter")
+APP_TITLE = env.str("APP_TITLE", default="Django Starter — Production-ready template")
+
+
+# Links
+REPO_LINK = env.str("REPO_LINK", default="https://github.com/ivanitch/django-starter")
+
 
 # Users
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = '/users/profile/'
+
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
