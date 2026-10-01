@@ -5,7 +5,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Привязываем жестко к тегу html */
+@layer components {
+  .beat {
+    @apply inline-block text-[0.8125rem] align-middle text-[#8d0606];
+    animation: beat infinite 1s;
+  }
+}
+
 html {
     --jira-bg: #ffffff;
     --jira-panel: #f4f5f7;
