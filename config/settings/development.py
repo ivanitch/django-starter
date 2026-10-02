@@ -1,8 +1,11 @@
 """
 Local development settings.
 """
+
 import socket
-from .base import *  # noqa
+
+from .base import *  # noqa: F403
+from .base import INSTALLED_APPS, MIDDLEWARE, SECRET_KEY
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
@@ -18,4 +21,4 @@ MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa
 _, _, _ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = ["127.0.0.1"] + [ip.rsplit(".", 1)[0] + ".1" for ip in _ips]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+MAILERS["default"]["BACKEND"] = "django.core.mail.backends.console.EmailBackend"
