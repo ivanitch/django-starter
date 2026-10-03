@@ -35,4 +35,5 @@ Add 3 variables:
 
 - `SERVER_HOST` — the IP address of your server (for example, 63.183.77.237).
 - `SERVER_USER` — the server username (for example, root).
+- `SERVER_PORT` — the port connection (for example, 2222).
 - `SSH_PRIVATE_KEY` — the private key copied from Step 3.
