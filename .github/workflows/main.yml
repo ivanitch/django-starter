@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "master", "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch: # Allows running the pipeline manually from the Actions tab
 
 jobs:
@@ -67,8 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test_and_lint]
 
-    # Deploy only on push to main or manual trigger
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    # Deploy only on push to master or manual trigger
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
 
     # Lock concurrent deploys: new ones wait for the current ones to finish
     concurrency:
@@ -84,5 +84,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/django-starter
-            git pull origin main
+            git pull origin master
             make prod-deploy
