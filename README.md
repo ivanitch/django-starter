@@ -123,6 +123,12 @@ restart the `web` and `nginx` containers.
 make prod-logs
 ```
 
+---
+
+## CI/CD Setup (GitHub Actions)
+
+[Detailed information on CI/CD settings](docs/ci-cd.md)
+
 [Detailed deployment instructions for production](docs/production.md)
 
 ---

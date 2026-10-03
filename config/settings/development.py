@@ -18,7 +18,7 @@ INSTALLED_APPS += ["debug_toolbar"]  # noqa
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa
 
 # Allow debug_toolbar to work inside Docker (where requests come from the gateway IP)
-_, _, _ips = socket.gethostbyname_ex(socket.gethostname())
+_host, _aliases, _ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = ["127.0.0.1"] + [ip.rsplit(".", 1)[0] + ".1" for ip in _ips]
 
 MAILERS["default"]["BACKEND"] = "django.core.mail.backends.console.EmailBackend"

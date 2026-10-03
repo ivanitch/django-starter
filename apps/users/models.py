@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class UserManager(BaseUserManager):
+class UserManager(BaseUserManager["User"]):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError(_("The Email field must be set"))
@@ -21,7 +21,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    username = None
+    username = None  # type: ignore[assignment]
     email = models.EmailField(_("Email address"), unique=True)
     avatar = models.ImageField(_("Avatar"), upload_to="users/avatars/", blank=True, null=True)
     phone = models.CharField(_("Phone number"), max_length=20, blank=True, null=True)
@@ -30,7 +30,7 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    objects = UserManager()
+    objects = UserManager()  # type: ignore[assignment,misc]
 
     class Meta:
         verbose_name = _("User")

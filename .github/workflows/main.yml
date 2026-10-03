@@ -1,0 +1,88 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: # Allows running the pipeline manually from the Actions tab
+
+jobs:
+  # ==========================================
+  # JOB 1: Tests and Linters (ID: test_and_lint)
+  # ==========================================
+  test_and_lint:
+    name: Run Linters and Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_DB: django_starter
+          POSTGRES_USER: django_starter
+          POSTGRES_PASSWORD: django_starter
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Set up Python 3.14
+        run: uv python install 3.14
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Check Code Formatting and Types
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+          uv run mypy .
+
+      - name: Run Pytest
+        env:
+          DATABASE_URL: postgres://django_starter:django_starter@localhost:5432/django_starter
+          SECRET_KEY: django-insecure-ci-test-key
+          DEBUG: "True"
+        run: uv run pytest
+
+  # ==========================================
+  # JOB 2: Deploy to Production (ID: deploy_to_prod)
+  # ==========================================
+  deploy_to_prod:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    needs: [test_and_lint]
+
+    # Deploy only on push to main or manual trigger
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+
+    # Lock concurrent deploys: new ones wait for the current ones to finish
+    concurrency:
+      group: production-deploy
+      cancel-in-progress: false
+
+    steps:
+      - name: Execute Remote SSH Commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/django-starter
+            git pull origin main
+            make prod-deploy

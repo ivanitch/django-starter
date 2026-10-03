@@ -88,7 +88,7 @@ class UserLoginView(LoginView):
 
 
 class UserLogoutView(LogoutView):
-    next_page = reverse_lazy("main:home")
+    next_page = reverse_lazy("main:home")  # type: ignore[assignment]
 
 
 class UserProfileView(LoginRequiredMixin, UpdateView):
