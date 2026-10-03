@@ -15,7 +15,7 @@ uv add django-tailwind "django-tailwind[reload]" cookiecutter
 INSTALLED_APPS = [
     # ...
     "tailwind",
-    "theme", # обслуживает CSS
+    "theme",  # обслуживает CSS
     "main",  # реальные страницы
 ]
 

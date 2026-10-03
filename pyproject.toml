@@ -1,7 +1,7 @@
 [project]
 name = "django-starter"
 version = "0.1.0"
-description = "Starter template for new Django projects, with ready-made infrastructure"
+description = "Production-ready starter template featuring Docker Compose, Postgres, Redis, TailwindCSS/DaisyUI etc."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -22,5 +22,33 @@ dev = [
     "django-extensions>=4.1",
     "ipython>=9.17.1",
     "pytest-django>=4.14.0",
+    "pytest>=8.3.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.14.0",
+    "mypy>=1.11.0,<1.14.0",
+    "django-stubs>=5.1.1",
     "cookiecutter>=2.7.1",
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.local"
+python_files = ["test_*.py", "*_test.py"]
+addopts = "--cov=. --cov-report=term-missing --cov-report=html"
+
+[tool.ruff]
+line-length = 119
+target-version = "py314"
+exclude = ["migrations", ".venv", "env", "staticfiles", "media"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "C4"]
+
+[tool.mypy]
+python_version = "3.14"
+check_untyped_defs = true
+ignore_missing_imports = true
+exclude = ["migrations", ".venv", "env"]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings.development"

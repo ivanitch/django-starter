@@ -1,11 +1,9 @@
 from django.urls import path
 
-from .views import (
-    components_page
-)
+from .views import components_page
 
-app_name = 'demo'
+app_name = "demo"
 
 urlpatterns = [
-    path('components/', components_page, name='components-page'),
+    path("components/", components_page, name="components-page"),
 ]

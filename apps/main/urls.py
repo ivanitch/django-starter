@@ -4,8 +4,8 @@ from .views import (
     home_page,
 )
 
-app_name = 'main'
+app_name = "main"
 
 urlpatterns = [
-    path('', home_page, name='home'),
+    path("", home_page, name="home"),
 ]
