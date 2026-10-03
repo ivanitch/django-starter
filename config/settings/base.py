@@ -136,7 +136,7 @@ MAILERS = {
             "use_ssl": env.bool("EMAIL_USE_SSL", default=False),
             "username": _email_user,
             "password": env.str("EMAIL_HOST_PASSWORD", default=""),
-        }
+        },
     }
 }
 

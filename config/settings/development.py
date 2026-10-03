@@ -5,7 +5,7 @@ Local development settings.
 import socket
 
 from .base import *  # noqa: F403
-from .base import INSTALLED_APPS, MIDDLEWARE, SECRET_KEY
+from .base import INSTALLED_APPS, MAILERS, MIDDLEWARE, SECRET_KEY
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]

@@ -56,7 +56,7 @@ class ActivateAccountView(View):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.filter(pk=uid).first()
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        except TypeError, ValueError, OverflowError:
             user = None
 
         if user is not None:

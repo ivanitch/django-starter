@@ -179,4 +179,3 @@ class TestAuthenticationFlow:
         response = client.get(url)
         assert response.status_code == 302
         assert response.url == reverse("users:register")
-

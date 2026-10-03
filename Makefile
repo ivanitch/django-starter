@@ -19,7 +19,7 @@ prod_service ?= web nginx
 # ==========================================
 help:
 	@echo "=========================================================="
-	@echo "           Django Starter Kit - Makefile                  "
+	@echo "           Django Starter - Makefile                      "
 	@echo "=========================================================="
 	@echo "LOCAL COMMANDS:"
 	@echo "  make build                   - Build local containers"
@@ -100,16 +100,16 @@ tailwind:
 	$(EXEC) python manage.py tailwind start
 
 lint:
-	$(DC) exec web uv run ruff check .
-	$(DC) exec web uv run ruff format --check .
-	$(DC) exec web uv run mypy .
+	$(DC) run --rm --no-deps web uv run ruff check .
+	$(DC) run --rm --no-deps web uv run ruff format --check .
+	$(DC) run --rm --no-deps web uv run mypy .
 
 format:
-	$(DC) exec web uv run ruff check --fix .
-	$(DC) exec web uv run ruff format .
+	$(DC) run --rm --no-deps web uv run ruff check --fix .
+	$(DC) run --rm --no-deps web uv run ruff format .
 
 test:
-	$(DC) exec web uv run pytest
+	$(DC) run --rm web uv run pytest
 
 db-backup:
 	@mkdir -p backups
