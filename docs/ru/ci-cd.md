@@ -33,7 +33,7 @@ cat ~/.ssh/github_actions
 ## Шаг 4: Настройка секретов в GitHub
 
 Откройте репозиторий на GitHub и перейдите в `Settings` ➡ `Secrets and variables` ➡ `Actions` ➡ `New repository secret`.
-Добавьте 3 переменные:
+Добавьте переменные:
 
 - `SERVER_HOST` — IP-адрес вашего сервера (например, 63.183.77.237).
 - `SERVER_USER` — Имя пользователя сервера (например, root).

@@ -25,7 +25,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PATH="/opt/venv/bin:$PATH"
 
 # Install runtime system dependencies (e.g., libpq5 for psycopg)
-RUN apt-get update && apt-get install -y --no-install-recommends libpq5 \
+RUN apt-get update && apt-get install -y --no-install-recommends libpq5 libatomic1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv package manager

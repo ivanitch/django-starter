@@ -12,9 +12,7 @@ A-запись твоего домена (и поддомена www) должн�
 Проверить Docker и Docker Compose:
 
 ```bash
-docker -v
-
-docker compose version
+docker -v && docker compose version
 ```
 
 Добавляем текущегго пользователя в группу Docker:

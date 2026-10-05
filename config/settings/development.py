@@ -22,3 +22,4 @@ _host, _aliases, _ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = ["127.0.0.1"] + [ip.rsplit(".", 1)[0] + ".1" for ip in _ips]
 
 MAILERS["default"]["BACKEND"] = "django.core.mail.backends.console.EmailBackend"
+MAILERS["default"]["OPTIONS"] = {}

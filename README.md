@@ -1,5 +1,9 @@
 # Ultimate Django Starter Kit
 
+Documentation [in Russian](docs/ru/README.md)
+
+---
+
 <p align="left">
   <img src="https://img.shields.io/badge/python-3.14-blue?logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/django-6.x-092E20?logo=django&logoColor=white" alt="Django">
@@ -55,7 +59,7 @@ make up
 
 This builds images, starts the database, and launches Django + Tailwind watcher.
 
-4. **Apply migrations and create a superuser::**
+4. **Apply migrations and create a superuser:**
 
 ```bash
 make migrate
@@ -135,7 +139,7 @@ make prod-logs
 
 ## Additional
 
-- [Make commands cheat sheet](docs/ru/make.md)
-- [Cheat sheet: Tailwind + Django (uv)](docs/ru/tailwind.md)
+- [Make commands cheat sheet](docs/make.md)
+- [Cheat sheet: Tailwind + Django (uv)](docs/tailwind.md)
 - [Production Deployment](docs/production.md)
 

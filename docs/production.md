@@ -12,9 +12,7 @@ point, the A record of your domain (and the www subdomain) must point to the ser
 Check Docker and Docker Compose:
 
 ```bash
-docker -v
-
-docker compose version
+docker -v && docker compose version
 ```
 
 Add the current user to the Docker group:
@@ -39,7 +37,7 @@ nano .env.prod
 > To generate a secret key directly on the server, run the following and write the key to `.env.prod`
 
 ```bash
-python3 -c "import secrets, string; alphabet = string.ascii_letters + string.digits + '-_'; print(''.join(secrets.choice(alphabet) for _ in range(64)))"
+python3 -c "import secrets, string; safe_punct = '!^*()-_=+'; alphabet = string.ascii_letters + string.digits + safe_punct; print(''.join(secrets.choice(alphabet) for _ in range(64)))"
 ```
 
 Required variables to configure in `.env.prod`:
@@ -50,6 +48,10 @@ Required variables to configure in `.env.prod`:
 - **Database:** Be sure to specify `POSTGRES_DB`, `POSTGRES_USER`, and `POSTGRES_PASSWORD`, since the official
   PostgreSQL Docker
   image requires them to pass the healthcheck successfully. Also set the same data in `DATABASE_URL`.
+  You can use the following command:
+  ```bash
+  python3 -c "import secrets, string; alphabet = string.ascii_letters + string.digits; print(''.join(secrets.choice(alphabet) for _ in range(20)))"
+  ```
 - **Email sending (SMTP):** For account activation to work, add SMTP settings and be sure to specify the "App password"
   in `EMAIL_HOST_PASSWORD`.
 

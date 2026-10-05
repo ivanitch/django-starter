@@ -1,12 +1,9 @@
 # users/forms.py
 from django import forms
-from django.contrib.auth import get_user_model
+from .models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.exceptions import ValidationError
 
-User = get_user_model()
-
-# Единый стиль для всех инпутов DaisyUI
 DAISY_INPUT_CLASS = (
     "input w-full bg-base-200 border-none focus:outline-none focus:ring-2"
     " focus:ring-primary/30 rounded-sm transition-shadow"

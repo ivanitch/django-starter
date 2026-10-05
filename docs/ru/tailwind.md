@@ -171,6 +171,8 @@ main/
 
 ---
 
+## Дополнительно
+
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Tailwind CSS русская локументация](https://tailwindcss.ru/)
 - [DaisyUI](https://daisyui.com/)

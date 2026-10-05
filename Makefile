@@ -82,8 +82,10 @@ shell:
 bash:
 	$(EXEC) bash
 
-migrate:
+makemigrations:
 	$(EXEC) python manage.py makemigrations
+
+migrate:
 	$(EXEC) python manage.py migrate
 
 startapp:
